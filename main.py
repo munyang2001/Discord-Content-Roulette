@@ -83,7 +83,6 @@ async def operation_lets_play(embed, message):
         users_to_ping += f"<@{chosen_eight[i].id}> "
     embed.description = desc
     del users_reacted_on_message[message.id]
-    print(f"AFTER GAME: {users_reacted_on_message}")
     await channel.send(content=f'{users_to_ping}', embed=embed)
     
 
@@ -111,12 +110,10 @@ async def on_reaction_add(reaction, user):
     global chosen_eight
     global active_channels
     global users_reacted_on_message
-    print("react added")
     
     if reaction.emoji == "🫃" and user.id != bot.application_id and reaction.message.id == active_channels[reaction.message.channel.id]:
 
         users_reacted_on_message[reaction.message.id].add(user)
-        print(f"AFTER ADD: {users_reacted_on_message}")
 
         channel = reaction.message.channel
         message = await channel.fetch_message(reaction.message.id)
@@ -124,11 +121,9 @@ async def on_reaction_add(reaction, user):
         embed_description(users_reacted_on_message[reaction.message.id], embed)
         await message.edit(embed=embed)
         
-        if len(users_reacted_on_message[reaction.message.id]) == 1:
-            print("ENTRY")
+        if len(users_reacted_on_message[reaction.message.id]) == 8:
             chosen_eight = list(users_reacted_on_message[reaction.message.id])
             del active_channels[channel.id]
-            #print(active_channels)
             await operation_lets_play(embed, reaction.message)
 
 @bot.event
@@ -136,18 +131,15 @@ async def on_reaction_remove(reaction, user):
     global users_reacted_on_message
 
     if reaction.message.channel.id in active_channels:
-        print("skibidi")
         if reaction.emoji == "🫃" and  user.id != bot.application_id and reaction.message.id == active_channels[reaction.message.channel.id]:
             users_reacted_on_message[reaction.message.id].remove(user)
-            print(f"AFTER DEL: {users_reacted_on_message}")
             
             channel = reaction.message.channel
             message = await channel.fetch_message(reaction.message.id)
             embed = message.embeds[0]
             embed_description(users_reacted_on_message[reaction.message.id], embed)
             await message.edit(embed=embed)
-    else:
-        print("brick")
+
 
 @bot.command()
 async def play(ctx):
@@ -168,19 +160,7 @@ async def play(ctx):
         await previous_active_message.delete()
     active_channels[ctx.channel.id] = message.id
     users_reacted_on_message[message.id] = set()
-    print(f"ON DECLARA: {users_reacted_on_message}")
-
-    #print(f'CHANNEL: {ctx.channel.id} : MESSAGE: {message.id}')
-    #print(active_channels)
-
 
     await message.add_reaction("🫃")
-    #print(f'CHANNEL NAME: {ctx.channel}')
-    #print(f'MESSAGE ID: {message.id}')
-    #print(f'MESSAGE CHANNEL: {message.channel}')
-    #print(f'MESSAGE CHANNEL ID: {message.channel.id}')
-    #print(f'SERVER NAME:{message.guild}')
-    #print(f'SERVER ID:{message.guild.id}')
-    #print(f'SERVER CHANNELS: {message.guild.channels}')
-    
+
 bot.run(bot_token)
