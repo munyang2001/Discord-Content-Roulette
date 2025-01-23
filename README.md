@@ -1,5 +1,5 @@
 # **Content Roulette bot for FFXIV**
-Simple bot that randomly rolls an 8 man FFXIV encounter and randomly assign jobs to players
+Simple discord bot that randomly rolls an 8 man FFXIV encounter and randomly assign jobs to players
 ## How to use
 ### **`!play`**
 Bot will respond with the prompt and react with :pregnant_man:
@@ -28,9 +28,12 @@ No duplicate jobs
     - Encounter specific 
         - No TANK LB3 in FRU
         - No mariokart strategy in UCoB Grand Octet
+        - No Arm's Length/Surecast TEA 
     - General
         - Healer's can't AOE heal
         - Tanks must play with no tank stance
+        - No Arm's Length/Surecast
+        - No Dots
 - User configuration for including/excluding jobs not unlocked or levelled
 - Server configuration to include/exclude specific encounters on the list
             
