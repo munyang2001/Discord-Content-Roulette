@@ -13,7 +13,7 @@ intents.members = True
 load_dotenv()
 bot_token = os.getenv("BOT_TOKEN")
 
-bot = commands.Bot(command_prefix='!', intents=intents)
+bot = commands.Bot(command_prefix='?', intents=intents)
 
 latest_bot_message = ""
 message_embed = ""
@@ -147,7 +147,7 @@ async def play(ctx):
     users_reacted = []
     locked_in = False
     embed = discord.Embed(
-        title = "FFXIV CONTENT ROULETTE",
+        title = "test FFXIV CONTENT ROULETTE",
         description = "Randomly picks an encounter and randomly picks role/job!",
         colour = discord.Colour.blue(),
     )
