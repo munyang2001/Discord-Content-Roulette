@@ -21,8 +21,6 @@ No duplicate jobs
 ![8 users reacted](https://cdn.discordapp.com/attachments/333422790612877323/1331691311727644782/image.png?ex=6793326e&is=6791e0ee&hm=fed956140b4da31818e8a9160071bf6f01d1deda82bebb32b688acc384fad266&)
 
 # **Planned Updates**
-### General
-- Be able to use bot in multiple discords simultaneously
 ### Features
 - Include random modifiers for more difficulty
     - Encounter specific 
