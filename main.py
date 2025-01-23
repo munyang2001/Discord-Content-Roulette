@@ -69,6 +69,7 @@ async def operation_lets_play(embed):
     embed.set_image(url = "https://cdn.discordapp.com/attachments/1310334851043295302/1323741150464573440/sexo.gif?ex=6791f5c4&is=6790a444&hm=18daec64a4b1dedcbc4ff04919cae49cc5c076894b9e6ea4744d3c12b6afbd37&")
 
     desc = ""
+    users_to_ping = ""
     for i in range(len(users_reacted)):
         print(i)
         print(len(users_reacted))
@@ -79,9 +80,10 @@ async def operation_lets_play(embed):
         else:
             desc += "⚔️"
         desc += f' {roster[i]} {chosen_eight[i].display_name}\n'
+        users_to_ping += f"<@{chosen_eight[i].id}> "
     print(f'{desc}')
     embed.description = desc
-    await message.edit(embed=embed)
+    await channel.send(content=f'{users_to_ping}', embed=embed)
 
 def embed_description(users_reacted, embed):
     user_count = len(users_reacted)
@@ -107,6 +109,7 @@ async def on_reaction_add(reaction, user):
     global users_reacted
     global chosen_eight
     global locked_in
+    print("react added")
     
     if locked_in == False: 
         if reaction.emoji == "🫃" and reaction.message.id == latest_bot_message.id and user.id != bot.application_id:
@@ -118,7 +121,7 @@ async def on_reaction_add(reaction, user):
             embed_description(users_reacted, embed)
             await message.edit(embed=embed)
             
-            if len(users_reacted) == 8:
+            if len(users_reacted) == 2:
                 print("ENTRY")
                 locked_in = True
                 chosen_eight = users_reacted
@@ -127,7 +130,7 @@ async def on_reaction_add(reaction, user):
 @bot.event
 async def on_reaction_remove(reaction, user):
     global users_reacted
-
+    print("react removed")
     if locked_in == False:
         if reaction.emoji == "🫃" and reaction.message.id == latest_bot_message.id and user.id != bot.application_id:
             
@@ -159,5 +162,12 @@ async def play(ctx):
     message_embed = embed
 
     await message.add_reaction("🫃")
-
+    print(f'{ctx.channel}')
+    print(f'MESSAGE ID: {message.id}')
+    print(f'MESSAGE CHANNEL: {message.channel}')
+    print(f'MESSAGE CHANNEL ID: {message.channel.id}')
+    print(f'SERVER NAME:{message.guild}')
+    print(f'SERVER ID:{message.guild.id}')
+    print(f'SERVER CHANNELS: {message.guild.channels}')
+    
 bot.run(bot_token)
