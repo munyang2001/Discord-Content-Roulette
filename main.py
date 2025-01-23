@@ -152,7 +152,6 @@ async def play(ctx):
         colour = discord.Colour.blue(),
     )
     embed.set_image(url = "https://cdn.discordapp.com/attachments/1331559141998596146/1331671884282200064/image.png?ex=67927796&is=67912616&hm=01b74a6f34fada548ac1e1a666d45b39a176b043842fcb1a41b3266433a1fd8d&")
-    embed.set_thumbnail(url = "https://cdn.discordapp.com/attachments/1331559141998596146/1331731239325012059/image.png?ex=6792aedd&is=67915d5d&hm=92dfe182ac75284597336e13a4b796be173512b605ba48421246d0dc0fca55af&")
     message = await ctx.send(embed = embed)
     global latest_bot_message
     global message_embed
