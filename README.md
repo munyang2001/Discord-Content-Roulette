@@ -28,10 +28,12 @@ No duplicate jobs
     - Encounter specific 
         - No TANK LB3 in FRU
         - No mariokart strategy in UCoB Grand Octet
+        - No Arm's Length/Surecast TEA 
     - General
         - Healer's can't AOE heal
         - Tanks must play with no tank stance
         - No Arm's Length/Surecast
+        - No Dots
 - User configuration for including/excluding jobs not unlocked or levelled
 - Server configuration to include/exclude specific encounters on the list
             
