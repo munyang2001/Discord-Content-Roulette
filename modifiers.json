@@ -1,0 +1,105 @@
+[
+    {
+        "modifier": "Remove all AOE GCD/oGCD Healing skills/spells",
+        "role": "healer"
+    },
+    {
+        "modifier": "Remove all oGCD Healing skills/spells",
+        "role": "healer"
+    },
+    {
+        "modifier": "Remove Swiftcast",
+        "role": "healer"
+    },
+    {
+        "modifier": "Remove skills/spells that give shields",
+        "role": "healer"
+    },
+    {
+        "modifier": "Remove if available: \nWHM - Assize\nAST - Earthly Star\nSCH - Indomitability\nSGE - Ixochole",
+        "role": "healer"
+    },
+    {
+        "modifier": "Remove if available: \nWHM - Asylum\nAST - Collective Unconscious & Celestial Opposition\nSCH - Whispering Dawn\nSGE - Physis II/Physis",
+        "role": "healer"
+    },
+
+    {
+        "modifier": "Remove Tank Stance",
+        "role": "tank"
+    },
+    {
+        "modifier": "Remove Rampart",
+        "role": "tank"
+    },
+    {
+        "modifier": "Remove all macros",
+        "role": "tank"
+    },
+    {
+        "modifier": "Remove all short CD's: \nWAR - Bloodwhetting/Raw Intuition/Nascent Flash\nDRK - TNB, Oblation\nGNB - Heart of Corundum/Heart Of Steel, Aurora\nPLD - Holy Sheltron/Sheltron, Intervention, Cover, Clemency",
+        "role": "tank"
+    },
+    {
+        "modifier": "Remove Shirk",
+        "role": "tank"
+    },
+
+    {
+        "modifier": "Remove Feint/Addle/Dismantle",
+        "role": "dps"
+    },
+    {
+        "modifier": "Must keep moving. If casting, must keep slidecasting",
+        "role": "dps"
+    },
+    {
+        "modifier": "Remove 3 skills/spells from your DPS rotation. You Pick",
+        "role": "dps"
+    },
+    {
+        "modifier": "Remove all movement skill/ability",
+        "role": "dps"
+    },
+    {
+        "modifier": "Place yourself at the bottom of the party list",
+        "role": "dps"
+    },
+    {
+        "modifier": "Hide any and all form of job gauges",
+        "role": "dps"
+    },
+
+    {
+        "modifier": "Enable all visual effects \nCharacter Config -> Control Settings -> Character Tab -> Battle Effects Settings",
+        "role": "general"
+    },
+    {
+        "modifier": "Remove Sprint",
+        "role": "general"
+    },
+    {
+        "modifier": "LB1 on CD. Any role",
+        "role": "general"
+    },
+    {
+        "modifier": "Remove Arm's Length/Surecast",
+        "role": "general"
+    },
+    {
+        "modifier": "AOE is a gain on 1",
+        "role": "general"
+    },
+    {
+        "modifier": "Hide all Hotbars",
+        "role": "general"
+    },
+    {
+        "modifier": "BGM 100 \nSystem Config -> Sound Settings -> BGM -> 100",
+        "role": "general"
+    },
+    {
+        "modifier": "Mute all in-game sounds \nSystem Config -> Sound Settings -> Master Volume -> 0 or Mute",
+        "role": "general"
+    }
+]

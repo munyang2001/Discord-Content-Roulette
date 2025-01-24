@@ -13,7 +13,7 @@ intents.members = True
 load_dotenv()
 bot_token = os.getenv("BOT_TOKEN")
 
-bot = commands.Bot(command_prefix='!', intents=intents)
+bot = commands.Bot(command_prefix='?', intents=intents)
 
 latest_bot_message = ""
 message_embed = ""
@@ -21,6 +21,7 @@ chosen_eight = []
 
 active_channels = {}
 users_reacted_on_message = {}
+modifiers_enabled_for_message_id = {}
 
 
 async def operation_lets_play(embed, message):
@@ -39,11 +40,31 @@ async def operation_lets_play(embed, message):
     random.shuffle(prange)
     random.shuffle(caster)
 
+    # Load and choose random content
     with open("content.json", "r") as file:
         content = json.load(file)
     keys = list(content.keys())
     random.shuffle(keys)
     shuffled_content = {key: content[key] for key in keys}
+
+    # Load and choose random modifiers
+    with open("modifiers.json", "r") as file:
+        modifiers_all = json.load(file)
+    modifiers_healer = [mods["modifier"] for mods in modifiers_all if mods["role"] == "healer"]
+    modifiers_tank = [mods["modifier"] for mods in modifiers_all if mods["role"] == "tank"]
+    modifiers_dps = [mods["modifier"] for mods in modifiers_all if mods["role"] == "dps"]
+    modifiers_general = [mods["modifier"] for mods in modifiers_all if mods["role"] == "general"]
+
+    chosen_modifiers = []
+    chosen_modifiers.append(random.choice(modifiers_tank))
+    chosen_modifiers.append(random.choice(modifiers_tank))
+    chosen_modifiers.append(random.choice(modifiers_healer))
+    chosen_modifiers.append(random.choice(modifiers_healer))
+    chosen_modifiers.append(random.choice(modifiers_dps))
+    chosen_modifiers.append(random.choice(modifiers_dps))
+    chosen_modifiers.append(random.choice(modifiers_dps))
+    chosen_modifiers.append(random.choice(modifiers_dps))
+    chosen_modifiers.append(random.choice(modifiers_general))
 
     roster = [tank[0], tank[1], regen[0], shield[0], melee[0], prange[0], caster[0]]
 
@@ -79,7 +100,13 @@ async def operation_lets_play(embed, message):
             desc += "👨‍⚕️"
         else:
             desc += "⚔️"
-        desc += f' {roster[i]} {chosen_eight[i].display_name}\n'
+        desc += f' **{roster[i]}** {chosen_eight[i].display_name}\n'
+
+        if message.id in modifiers_enabled_for_message_id and modifiers_enabled_for_message_id[message.id] == 1:
+            desc += f'__Role Modifier:__ {chosen_modifiers[i]}\n'
+            if i == len(users_reacted_on_message[message.id]) - 1:
+                    desc += f'\n__General Modifier:__ {chosen_modifiers[-1]}'
+
         users_to_ping += f"<@{chosen_eight[i].id}> "
     embed.description = desc
     del users_reacted_on_message[message.id]
@@ -121,7 +148,7 @@ async def on_reaction_add(reaction, user):
         embed_description(users_reacted_on_message[reaction.message.id], embed)
         await message.edit(embed=embed)
         
-        if len(users_reacted_on_message[reaction.message.id]) == 8:
+        if len(users_reacted_on_message[reaction.message.id]) == 1:
             chosen_eight = list(users_reacted_on_message[reaction.message.id])
             del active_channels[channel.id]
             await operation_lets_play(embed, reaction.message)
@@ -142,16 +169,24 @@ async def on_reaction_remove(reaction, user):
 
 
 @bot.command()
-async def play(ctx):
+async def play(ctx, mod: str = None):
     embed = discord.Embed(
         title = "FFXIV CONTENT ROULETTE",
         description = "Randomly picks an encounter and randomly picks role/job!",
         colour = discord.Colour.blue(),
     )
     embed.set_image(url = "https://cdn.discordapp.com/attachments/1331559141998596146/1331671884282200064/image.png?ex=67927796&is=67912616&hm=01b74a6f34fada548ac1e1a666d45b39a176b043842fcb1a41b3266433a1fd8d&")
+    if (mod == "mods"):
+        embed.set_footer(text = "Modifiers Enabled")
+    else:
+        embed.set_footer(text = "'!play mods' to enable fight modifiers for difficulty")
     message = await ctx.send(embed = embed)
     global message_embed
     message_embed = embed
+
+    global modifiers_enabled_for_message_id
+    if (mod == "mods"):
+        modifiers_enabled_for_message_id[message.id] = 1
 
     global active_channels
     global users_reacted_on_message
