@@ -13,7 +13,7 @@ intents.members = True
 load_dotenv()
 bot_token = os.getenv("BOT_TOKEN")
 
-bot = commands.Bot(command_prefix='?', intents=intents)
+bot = commands.Bot(command_prefix='!', intents=intents)
 
 latest_bot_message = ""
 message_embed = ""
@@ -148,7 +148,7 @@ async def on_reaction_add(reaction, user):
         embed_description(users_reacted_on_message[reaction.message.id], embed)
         await message.edit(embed=embed)
         
-        if len(users_reacted_on_message[reaction.message.id]) == 1:
+        if len(users_reacted_on_message[reaction.message.id]) == 8:
             chosen_eight = list(users_reacted_on_message[reaction.message.id])
             del active_channels[channel.id]
             await operation_lets_play(embed, reaction.message)
